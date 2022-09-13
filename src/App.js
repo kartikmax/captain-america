@@ -39,7 +39,7 @@ const App = () => {
             <TableCell>Capital</TableCell>
             <TableCell>Regions</TableCell>
             <TableCell>Images</TableCell>
-            <TableCell>Imgs 2</TableCell>
+            {/* <TableCell>Imgs 2</TableCell> */}
           </TableHead>
           {countryData &&
             countryData.map((x) => {
@@ -60,9 +60,9 @@ const App = () => {
                       <TableCell>
                         <img src={x.flags.png} alt={x.flags} height="40" width="60" />
                       </TableCell>
-                      <TableCell>
+                      {/* <TableCell>
                         <img src={x.coatOfArms.png} alt={x.flag} height="40" width="60" />
-                      </TableCell>
+                      </TableCell> */}
                     </TableRow>
                   </TableBody>
                 </>
