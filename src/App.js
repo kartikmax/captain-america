@@ -1,8 +1,11 @@
 import React from 'react'
 
 const App = () => {
+  const myStyle={
+    backgroundColor:"lightBlue"
+  }
   return (
-    <div>
+    <div style={myStyle} >
       hello world this is version control
     </div>
   )
