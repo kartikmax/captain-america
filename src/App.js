@@ -46,9 +46,6 @@ const App = () => {
             countryData.map((x) => {
               return (
                 <>
-                  {/* {x.name.common}
-              <p>{x.flag}</p>
-            <img src={x.flags.png} height="35px" width="80px" alt={x.flag} /> */}
                   <TableBody>
                     <TableRow>
                       <TableCell>{x.name.common}</TableCell>
