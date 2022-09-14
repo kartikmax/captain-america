@@ -1,0 +1,68 @@
+h1 {
+  font-family: "arial";
+  text-align: center;
+  max-width: 1200px;
+  margin: 30px auto;
+}
+.container {
+  background-color: lightgray;
+  height: 400px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.container > * {
+  width: 25%;
+  cursor: pointer;
+  font-size: larger;
+  text-align: center;
+  /* padding: 30px; */
+}
+
+.child-1 {
+  width: 50%;
+}
+
+.child-1,
+.child-2 {
+  height: 100%;
+}
+
+.child-3,
+.child-4 {
+  height: 50%;
+}
+
+.child-1 {
+  background-color: lightblue;
+}
+.child-2 {
+  background-color: lightgreen;
+}
+.child-3 {
+  background-color: lightsalmon;
+}
+.child-4 {
+  background-color: lightcoral;
+}
+
+@media screen and (max-width: 768px) {
+  .child {
+    width: 50%;
+    height: 50%;
+  }
+}
+
+@media screen and (max-width: 414px) {
+  .container {
+    height: auto;
+  }
+  .child {
+    width: 100%;
+    height: 100px;
+  }
+}
