@@ -8,7 +8,6 @@ import {
   TableHead,
   TableRow,
 } from "@mui/material";
-// import { Box } from "@mui/system";
 import React, { useEffect, useState } from "react";
 import Loading from "./Loading";
 
@@ -21,7 +20,7 @@ const myStyle = {
   },
 };
 
-const Main = ({ toggleNav, settoggleNav }) => {
+const Main = ({ setToggle }) => {
   const [countryData, setCountryData] = useState();
   function getData() {
     fetch("https://restcountries.com/v3.1/all")
@@ -34,18 +33,17 @@ const Main = ({ toggleNav, settoggleNav }) => {
   useEffect(() => {
     getData();
   }, []);
-
-  function navigate() {
-    console.log("clicked");
-    settoggleNav(true);
-  }
-
-  // console.log(countryData);
+  // console.log(countryData,"here")
   return (
     <div style={myStyle.root}>
       hello world this is version control
       <h1>this is the table</h1>
-      <Button variant="contained" onClick={navigate}>
+      <Button
+        variant="contained"
+        onClick={() => {
+          setToggle(true);
+        }}
+      >
         Back to Main Page
       </Button>
       <TableContainer component={Paper}>
@@ -55,7 +53,6 @@ const Main = ({ toggleNav, settoggleNav }) => {
             <TableCell>Capital</TableCell>
             <TableCell>Regions</TableCell>
             <TableCell>Images</TableCell>
-            {/* <TableCell>Imgs 2</TableCell> */}
           </TableHead>
           {countryData ? (
             countryData.map((x, index) => {

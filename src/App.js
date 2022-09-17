@@ -1,74 +1,60 @@
-import React, { useReducer } from "react";
+import React, { useReducer, useState } from "react";
 import Main from "./Components/Main";
 import Analytics from "./Components/Analytics";
 import AddCountry from "./Components/AddCountry";
 import ChartGraph from "./Components/ChartGraph";
+import { reducerF } from "./Reducer";
 import "./App.css";
 
 const initalState = 0;
-const reducer = (state, action) => {
-  // console.log(state, action);
-  if (action.type === "one") {
-    return (state = 1);
-  }
-  if (action.type === "two") {
-    return (state = 2);
-  }
-  if (action.type === "three") {
-    return (state = 3);
-  }
-  if (action.type === "four") {
-    return (state = 4);
-  }
-  return state;
-};
 
 export default function App() {
-  const [state, dispatch] = useReducer(reducer, initalState);
-  console.log(state);
+  const [state, dispatch] = useReducer(reducerF, initalState);
+  const [toggle, setToggle] = useState(true);
+
+  function handleOne() {
+    dispatch({ type: "one" });
+    toggle ? setToggle(false) : setToggle(true);
+  }
+
+  function handleTwo() {
+    dispatch({ type: "two" });
+    toggle ? setToggle(false) : setToggle(true);
+  }
+
+  function handleThree() {
+    dispatch({ type: "three" });
+    toggle ? setToggle(false) : setToggle(true);
+  }
+
+  function handleFour() {
+    dispatch({ type: "four" });
+    toggle ? setToggle(false) : setToggle(true);
+  }
+  console.log(state, toggle, "here is value");
   return (
     <>
       <h1>Countries App</h1>
-      {state === 0 && (
+      {(state === 0 || toggle) && (
         <div className="container">
-          <div
-            className="child child-1"
-            onClick={() => dispatch({ type: "one" })}
-          >
+          <div className="child child-1" onClick={handleOne}>
             <div className="innerText">All Details</div>
           </div>
-          <div
-            className="child child-2"
-            onClick={() => dispatch({ type: "two" })}
-          >
+          <div className="child child-2" onClick={handleTwo}>
             <div className="innerText">Analytics</div>
           </div>
-          <div
-            className="child child-3"
-            onClick={() => dispatch({ type: "three" })}
-          >
+          <div className="child child-3" onClick={handleThree}>
             <div className="innerText">Add Country</div>
           </div>
-          <div
-            className="child child-4"
-            onClick={() => dispatch({ type: "four" })}
-          >
+          <div className="child child-4" onClick={handleFour}>
             <div className="innerText">Chart</div>
           </div>
         </div>
       )}
-      {state === 1 && <Main
-      //  backState={} backStateFn={}
-      />}
-      {state === 2 && <Analytics
-      //  backState={} backStateFn={}
-      />}
-      {state === 3 && <AddCountry
-      //  backState={} backStateFn={}
-      />}
-      {state === 4 && <ChartGraph
-      //  backState={} backStateFn={}
-      />}
+      {state === 1 && !toggle && <Main setToggle={setToggle} />}
+      {state === 2 && !toggle && <Analytics setToggle={setToggle} />}
+      {state === 3 && !toggle && <AddCountry setToggle={setToggle} />}
+      {state === 4 && !toggle && <ChartGraph setToggle={setToggle} />}
     </>
   );
 }
