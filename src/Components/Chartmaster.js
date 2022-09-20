@@ -1,4 +1,4 @@
-import { Switch } from "@mui/material";
+import {  Switch } from "@mui/material";
 import { arrange, sliceHead, tidy, desc, mutate } from "@tidyjs/tidy";
 import React from "react";
 import { useState } from "react";
@@ -12,28 +12,50 @@ import {
 } from "recharts";
 import Data from "./AllApi.json";
 
-const cdata2 = tidy(
-  Data,
-  mutate({ populationDiv: (x) => x.population / 10000 }),
-  arrange([desc("area")]),
-  sliceHead(10)
-);
-console.log(cdata2, "here");
-
 export default function Chartmaster() {
   const [value, setValue] = useState("population");
+  const [top, setTop] = useState(10);
   function handleChange() {
-    value === "population" ? setValue("area") : setValue("population");
-    // console.log("click", value);
+    value === "area" ? setValue("population") : setValue("area");
   }
+
+  function handleChangeTop(e) {
+    setTop(e.target.value);
+  }
+
+  const cdata2 = tidy(
+    Data,
+    mutate({ populationDiv: (x) => x.population / 10000 }),
+    arrange([desc("area")]),
+    sliceHead(top)
+  );
+  console.log(cdata2, "here");
+
   return (
     <>
-      <span style={{ border: "2px solid red", padding: "10px" }}>
-        <>&nbsp; area</>
-        <Switch onClick={handleChange} />
-        <>population </>
-      </span>
-      <LineChart width={500} height={300} data={cdata2}>
+      <div style={{ margin: "20px" }}>
+        <span
+          style={{
+            border: "2px solid red",
+            padding: "10px",
+            margin: "20px",
+            backgroundColor: "aquamarine",
+            borderRadius: "5px",
+          }}
+        >
+          <>&nbsp; area</>
+          <Switch onClick={handleChange} />
+          <>population </>
+        </span>
+      </div>
+      <select onChange={handleChangeTop}>
+        <option>10</option>
+        <option>20</option>
+        <option>30</option>
+        {/* <option>40</option>
+        <option>50</option> */}
+      </select>
+      <LineChart width={1000} height={300} data={cdata2}>
         <XAxis dataKey="flag" />
         <YAxis />
         <Tooltip />
