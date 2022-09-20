@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+// import React, { useState, useEffect } from "react";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -10,7 +10,8 @@ import {
   Legend,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
-// import faker from 'faker';
+import { arrange, desc, sliceHead, tidy } from "@tidyjs/tidy";
+import Data from "./AllApi.json";
 
 ChartJS.register(
   CategoryScale,
@@ -22,60 +23,47 @@ ChartJS.register(
   Legend
 );
 
-export function App() {
-  const [countryData, setCountryData] = useState();
-  function getData() {
-    fetch("https://restcountries.com/v3.1/all")
-      .then((res) => res.json())
-      .then((json) => {
-        setCountryData(json);
-      });
-  }
-  useEffect(() => {
-    getData();
-  }, []);
-
-  console.log(countryData, "here");
-  const options = {
-    responsive: true,
-    plugins: {
-      legend: {
-        position: "top",
-      },
-      title: {
-        display: true,
-        text: "chart js",
-      },
+const options = {
+  responsive: true,
+  plugins: {
+    legend: {
+      position: "top",
     },
-  };
+    title: {
+      display: true,
+      text: "chart js",
+    },
+  },
+};
 
-  const labels = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-  ];
+const cdata2 = tidy(Data, arrange([desc("area")]), sliceHead(10));
 
-  const data = {
-    labels,
-    datasets: [
-      {
-        label: "Dataset 1",
-        data: [157, 150, 150, 104, 122, 194],
-        borderColor: "rgb(255, 99, 132)",
-        backgroundColor: "rgba(255, 99, 132, 0.5)",
-      },
-      {
-        label: "Dataset 2",
-        data: [119, 153, 164, 158, 155, 114],
-        borderColor: "rgb(53, 162, 235)",
-        backgroundColor: "rgba(53, 162, 235, 0.5)",
-      },
-    ],
-  };
+const names = cdata2.map((x) => x.name.common);
+console.log(cdata2, "here", names);
 
-  return <Line options={options} data={data} />;
+
+export function App() {
+  
+const data = {
+  names,
+  datasets: [
+    {
+      label: "population",
+      data: cdata2.map((x) => x.population),
+      borderColor: "rgb(255, 99, 132)",
+      backgroundColor: "rgba(255, 99, 132, 0.5)",
+    },
+    {
+      label: "area",
+      data: cdata2.map((x) => x.area / 10000),
+      borderColor: "rgb(53, 162, 235)",
+      backgroundColor: "rgba(53, 162, 235, 0.5)",
+    },
+  ],
+};
+  return (
+    <div style={{ height: "300px", width: "500px" }}>
+      <Line options={options} data={data} />
+    </div>
+  );
 }

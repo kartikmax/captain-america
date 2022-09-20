@@ -1,9 +1,8 @@
 import { Button } from "@mui/material";
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { App } from "./Chartmaster";
 
 function Analytics({ setToggle }) {
-  
   return (
     <>
       Analytics
@@ -17,9 +16,7 @@ function Analytics({ setToggle }) {
       </Button>
       <br />
       top ten countries by area
-      <div style={{ height: "300px", width: "500px" }}>
-        <App />
-      </div>
+      <App />
     </>
   );
 }
