@@ -1,5 +1,6 @@
 import React from "react";
 import { Button } from "@mui/material";
+// import myVideo from "../Components/space.mp4";
 
 function AddCountry({ setToggle }) {
   return (
@@ -13,6 +14,9 @@ function AddCountry({ setToggle }) {
       >
         click home hi
       </Button>
+      {/* <video style={{ height: "200px", width: "400px" }} controls>
+        <source src={myVideo} />
+      </video> */}
     </div>
   );
 }

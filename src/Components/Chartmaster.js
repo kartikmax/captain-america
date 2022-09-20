@@ -1,69 +1,50 @@
-// import React, { useState, useEffect } from "react";
+import { Switch } from "@mui/material";
+import { arrange, sliceHead, tidy, desc, mutate } from "@tidyjs/tidy";
+import React from "react";
+import { useState } from "react";
 import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
   Tooltip,
-  Legend,
-} from "chart.js";
-import { Line } from "react-chartjs-2";
-import { arrange, desc, sliceHead, tidy } from "@tidyjs/tidy";
+} from "recharts";
 import Data from "./AllApi.json";
 
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend
+const cdata2 = tidy(
+  Data,
+  mutate({ populationDiv: (x) => x.population / 10000 }),
+  arrange([desc("area")]),
+  sliceHead(10)
 );
+console.log(cdata2, "here");
 
-const options = {
-  responsive: true,
-  plugins: {
-    legend: {
-      position: "top",
-    },
-    title: {
-      display: true,
-      text: "chart js",
-    },
-  },
-};
-
-const cdata2 = tidy(Data, arrange([desc("area")]), sliceHead(10));
-
-const names = cdata2.map((x) => x.name.common);
-console.log(cdata2, "here", names);
-
-
-export function App() {
-  
-const data = {
-  names,
-  datasets: [
-    {
-      label: "population",
-      data: cdata2.map((x) => x.population),
-      borderColor: "rgb(255, 99, 132)",
-      backgroundColor: "rgba(255, 99, 132, 0.5)",
-    },
-    {
-      label: "area",
-      data: cdata2.map((x) => x.area / 10000),
-      borderColor: "rgb(53, 162, 235)",
-      backgroundColor: "rgba(53, 162, 235, 0.5)",
-    },
-  ],
-};
+export default function Chartmaster() {
+  const [value, setValue] = useState("population");
+  function handleChange() {
+    value === "population" ? setValue("area") : setValue("population");
+    // console.log("click", value);
+  }
   return (
-    <div style={{ height: "300px", width: "500px" }}>
-      <Line options={options} data={data} />
-    </div>
+    <>
+      <span style={{ border: "2px solid red", padding: "10px" }}>
+        <>&nbsp; area</>
+        <Switch onClick={handleChange} />
+        <>population </>
+      </span>
+      <LineChart width={500} height={300} data={cdata2}>
+        <XAxis dataKey="flag" />
+        <YAxis />
+        <Tooltip />
+        <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
+        {value === "population" && (
+          <Line type="monotone" dataKey="populationDiv" stroke="#8884d8" />
+        )}
+        {value === "area" && (
+          <Line type="monotone" dataKey="area" stroke="#82ca9d" />
+        )}
+      </LineChart>
+    </>
   );
 }
