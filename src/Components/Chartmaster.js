@@ -1,4 +1,4 @@
-import {  Switch } from "@mui/material";
+import { Switch } from "@mui/material";
 import { arrange, sliceHead, tidy, desc, mutate } from "@tidyjs/tidy";
 import React from "react";
 import { useState } from "react";
@@ -43,9 +43,9 @@ export default function Chartmaster() {
             borderRadius: "5px",
           }}
         >
-          <>&nbsp; area</>
+          <>&nbsp; population</>
           <Switch onClick={handleChange} />
-          <>population </>
+          <>area </>
         </span>
       </div>
       <select onChange={handleChangeTop}>
@@ -55,7 +55,17 @@ export default function Chartmaster() {
         {/* <option>40</option>
         <option>50</option> */}
       </select>
-      <LineChart width={1000} height={300} data={cdata2}>
+      <LineChart
+        width={900}
+        height={300}
+        data={cdata2}
+        style={{
+          border: "1px solid black",
+          padding: "10px",
+          backgroundColor: "#fafad2",
+          borderRadius:"30px"
+        }}
+      >
         <XAxis dataKey="flag" />
         <YAxis />
         <Tooltip />
