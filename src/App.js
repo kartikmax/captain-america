@@ -34,7 +34,7 @@ export default function App() {
   console.log(state, toggle, "here is value");
   return (
     <>
-      <h1>Countries App</h1>
+      <h1>Country App</h1>
       {(state === 0 || toggle) && (
         <div className="container">
           <div className="child child-1" onClick={handleOne}>
@@ -44,7 +44,7 @@ export default function App() {
             <div className="innerText">Analytics</div>
           </div>
           <div className="child child-3" onClick={handleThree}>
-            <div className="innerText">Add Country</div>
+            <div className="innerText">Add app iframe</div>
           </div>
           <div className="child child-4" onClick={handleFour}>
             <div className="innerText">Chart</div>
