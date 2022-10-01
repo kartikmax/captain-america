@@ -47,7 +47,7 @@ export default function App() {
             <div className="innerText">sorting tables</div>
           </div>
           <div className="child child-4" onClick={handleFour}>
-            <div className="innerText">Chart</div>
+            <div className="innerText">Indiviudal country details</div>
           </div>
         </div>
       )}

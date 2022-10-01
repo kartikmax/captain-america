@@ -7,18 +7,16 @@ import {
   Paper,
   TableBody,
   TableRow,
-  Typography,
 } from "@mui/material";
 import Data from "../Components/AllApi.json";
 import { useState } from "react";
-import { arrange, tidy, desc, mutate } from "@tidyjs/tidy";
+import { arrange, tidy, desc, mutate, asc } from "@tidyjs/tidy";
 
 function AddCountry({ setToggle }) {
-  const [btnColor, setBtnColor] = useState("primary");
-  // const [btnColor2, setBtnColor2] = useState("primary");
-  // const [btnColor3, setBtnColor3] = useState("primary");
-  // const [btnColor4, setBtnColor4] = useState("primary");
-  // const [btnColor5, setBtnColor5] = useState("primary");
+  // const [btnColor, setBtnColor] = useState("primary");
+  const btnColor = "primary";
+  const [orderX, setOrderX] = useState("asscending");
+
   const [value, setValue] = useState("cname");
 
   const showData = tidy(
@@ -28,7 +26,8 @@ function AddCountry({ setToggle }) {
       latitude: (x) => x.latlng[0].toFixed(2),
       longitude: (x) => x.latlng[1].toFixed(2),
     }),
-    arrange([value])
+
+    orderX === "asscending" ? arrange([asc(value)]) : arrange([desc(value)])
   );
   console.log(showData[0]);
 
@@ -48,6 +47,10 @@ function AddCountry({ setToggle }) {
     setValue("latitude");
   }
 
+  function handleOrder() {
+    orderX === "asscending" ? setOrderX("descending") : setOrderX("asscending");
+  }
+
   return (
     <>
       add country
@@ -59,7 +62,15 @@ function AddCountry({ setToggle }) {
       >
         click home hi
       </Button>
-      <Typography variant="bolder">current sorted Data :-{value}</Typography>
+      <h3>current sorted Data :-{value}</h3>
+      change the order of data
+      <Button
+        variant="contained"
+        onClick={handleOrder}
+        color={orderX === "ascending" ? "success" : "secondary"}
+      >
+        {orderX}
+      </Button>
       <Table component={Paper}>
         <Table>
           <TableHead>
@@ -110,6 +121,7 @@ function AddCountry({ setToggle }) {
               </Button>
             </TableCell>
           </TableHead>
+
           {showData.map((x, index) => {
             return (
               <TableBody>
