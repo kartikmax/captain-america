@@ -44,10 +44,10 @@ export default function App() {
             <div className="innerText">Analytics</div>
           </div>
           <div className="child child-3" onClick={handleThree}>
-            <div className="innerText">Add app iframe</div>
+            <div className="innerText">sorting tables</div>
           </div>
           <div className="child child-4" onClick={handleFour}>
-            <div className="innerText">Chart</div>
+            <div className="innerText">Indiviudal country details</div>
           </div>
         </div>
       )}
