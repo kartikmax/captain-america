@@ -83,6 +83,7 @@ function AddCountry({ setToggle }) {
                 Name
               </Button>
             </TableCell>
+            <TableCell>Flag</TableCell>
 
             <TableCell>
               <Button
@@ -127,6 +128,15 @@ function AddCountry({ setToggle }) {
               <TableBody>
                 <TableRow>
                   <TableCell key={index}>{x.cname}</TableCell>
+                  <TableCell>
+                    <img
+                      src={x.flags.png}
+                      alt={x.flags}
+                      height="40"
+                      width="60"
+                      // style={myStyle.borderFlag}
+                    />
+                  </TableCell>
                   <TableCell>{x.population}</TableCell>
                   <TableCell>{x.area}</TableCell>
                   <TableCell> {x.latitude} </TableCell>
