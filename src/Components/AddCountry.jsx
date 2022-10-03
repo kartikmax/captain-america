@@ -26,7 +26,6 @@ function AddCountry({ setToggle }) {
       latitude: (x) => x.latlng[0].toFixed(2),
       longitude: (x) => x.latlng[1].toFixed(2),
     }),
-
     orderX === "asscending" ? arrange([asc(value)]) : arrange([desc(value)])
   );
   console.log(showData[0]);
@@ -71,7 +70,7 @@ function AddCountry({ setToggle }) {
       >
         {orderX}
       </Button>
-      <Table component={Paper}>
+      <Table component={Paper} style={{ backgroundColor: "#add8e6" }}>
         <Table>
           <TableHead>
             <TableCell>
@@ -83,6 +82,7 @@ function AddCountry({ setToggle }) {
                 Name
               </Button>
             </TableCell>
+            <TableCell>Flag</TableCell>
 
             <TableCell>
               <Button
@@ -127,10 +127,18 @@ function AddCountry({ setToggle }) {
               <TableBody>
                 <TableRow>
                   <TableCell key={index}>{x.cname}</TableCell>
+                  <TableCell>
+                    <img
+                      src={x.flags.png}
+                      alt={x.flags}
+                      height="40"
+                      width="60"
+                    />
+                  </TableCell>
                   <TableCell>{x.population}</TableCell>
                   <TableCell>{x.area}</TableCell>
-                  <TableCell> {x.latitude} </TableCell>
-                  <TableCell> {x.longitude} </TableCell>
+                  <TableCell>{x.latitude} </TableCell>
+                  <TableCell>{x.longitude} </TableCell>
                 </TableRow>
               </TableBody>
             );
