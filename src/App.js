@@ -7,7 +7,7 @@ import { reducerF } from "./Reducer";
 import "./App.css";
 
 const initalState = 0;
-
+// new BRANCH
 export default function App() {
   const [state, dispatch] = useReducer(reducerF, initalState);
   const [toggle, setToggle] = useState(true);
