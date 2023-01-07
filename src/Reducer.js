@@ -12,8 +12,5 @@ export const reducerF = (state, action) => {
   if (action.type === "four") {
     return (state = 4);
   }
-  // if (action.type === "reset") {
-  //   return (state = 0);
-  // }
   return state;
 };
